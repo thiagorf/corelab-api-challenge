@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { createVehicleController } from "../../core/useCases/createVehicle";
-import { getAllVehicleController } from "../../core/useCases/getAllVehicle";
-import { getOneVehicleController } from "../../core/useCases/getOneVehicle";
-import { updateVehicleController } from "../../core/useCases/updateVehicle/update-vehicle";
+import {
+    createVehicleController,
+    getAllVehicleController,
+    getOneVehicleController,
+    updateVehicleController,
+} from "../../core/useCases";
 
 const vehicleRoutes = Router();
 
