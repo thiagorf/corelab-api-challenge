@@ -1,6 +1,7 @@
 import prisma from "../../../../../infra/database/prisma";
 import { Vehicle } from "../../../core/entity/vehicle";
 import { CreateVehicleDTO } from "../../../core/useCases/createVehicle";
+import { UpdateVehicleDTO } from "../../../core/useCases/updateVehicle/update-vehicle-dto";
 import { VehicleRepository } from "../interfaces/vehicle-repository";
 
 export class PrismaVehicleRepository implements VehicleRepository {
@@ -26,5 +27,18 @@ export class PrismaVehicleRepository implements VehicleRepository {
         const vehicles = await prisma.vehicle.findMany();
 
         return vehicles;
+    }
+
+    async updateVehicle(data: UpdateVehicleDTO): Promise<Vehicle> {
+        const { vehicle_id, ...newData } = data;
+
+        const vehicle = await prisma.vehicle.update({
+            where: {
+                id: vehicle_id,
+            },
+            data: newData,
+        });
+
+        return vehicle;
     }
 }
