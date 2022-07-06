@@ -20,5 +20,5 @@ model Vehicle {
   color String
   year Int
   plate String
-  favorite Boolean
+  favorite Boolean @default(false)
 }
