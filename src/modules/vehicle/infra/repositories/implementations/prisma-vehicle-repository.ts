@@ -5,10 +5,20 @@ import { VehicleRepository } from "../interfaces/vehicle-repository";
 
 export class PrismaVehicleRepository implements VehicleRepository {
     async createVehicle(data: CreateVehicleDTO): Promise<Vehicle> {
-        const result = await prisma.vehicle.create({
+        const vehicle = await prisma.vehicle.create({
             data,
         });
 
-        return result;
+        return vehicle;
+    }
+
+    async getOneVehicle(vehicle_id: string): Promise<Vehicle> {
+        const vehicle = await prisma.vehicle.findUnique({
+            where: {
+                id: vehicle_id,
+            },
+        });
+
+        return vehicle;
     }
 }
