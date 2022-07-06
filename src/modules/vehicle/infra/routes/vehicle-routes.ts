@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { asyncErrors } from "../../../../infra/middleware/async-erros";
 import { createVehicleController } from "../../core/useCases/createVehicle";
 import { getOneVehicleController } from "../../core/useCases/getOneVehicle";
 

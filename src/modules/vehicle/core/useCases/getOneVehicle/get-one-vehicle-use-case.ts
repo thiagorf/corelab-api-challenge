@@ -5,6 +5,11 @@ export class GetOneVehicleUseCase {
 
     async perform(vehicle_id: string) {
         const vehicle = await this.vehicleRepository.getOneVehicle(vehicle_id);
+        console.log(vehicle);
+
+        if (!vehicle) {
+            throw new Error("Invalid vehicle id");
+        }
 
         return vehicle;
     }

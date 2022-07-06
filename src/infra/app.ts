@@ -1,7 +1,7 @@
 import express, { json } from "express";
+import "express-async-errors";
 import { asyncErrors } from "./middleware/async-erros";
 import { v1 } from "./routes/versions";
-import "express-async-errors";
 import cors from "cors";
 
 const app = express();
