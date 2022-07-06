@@ -41,4 +41,14 @@ export class PrismaVehicleRepository implements VehicleRepository {
 
         return vehicle;
     }
+
+    async deleteVehicle(vehicle_id: string): Promise<Vehicle> {
+        const vehicle = await prisma.vehicle.delete({
+            where: {
+                id: vehicle_id,
+            },
+        });
+
+        return vehicle;
+    }
 }

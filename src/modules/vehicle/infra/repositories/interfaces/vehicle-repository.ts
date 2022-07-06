@@ -7,4 +7,5 @@ export interface VehicleRepository {
     getOneVehicle(vehicle_id: string): Promise<Vehicle>;
     getAllVehicle(): Promise<Vehicle[]>;
     updateVehicle(data: UpdateVehicleDTO): Promise<Vehicle>;
+    deleteVehicle(vehicle_id: string): Promise<Vehicle>;
 }
