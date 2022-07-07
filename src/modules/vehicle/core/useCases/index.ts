@@ -5,3 +5,4 @@ export * from "./updateVehicle";
 export * from "./deleteVehicle";
 export * from "./favoriteVehicle";
 export * from "./getAllFavoriteVehicle";
+export * from "./unfavoriteVehicle";

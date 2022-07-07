@@ -1,8 +1,7 @@
 import { VehicleRepository } from "../../../infra/repositories/interfaces/vehicle-repository";
 
-export class FavoriteVehicleUseCase {
+export class UnfavoriteVehicleUseCase {
     constructor(private vehicleRepository: VehicleRepository) {}
-
     async perform(vehicle_id: string) {
         const vehicleExists = await this.vehicleRepository.getOneVehicle(vehicle_id);
 
@@ -10,11 +9,11 @@ export class FavoriteVehicleUseCase {
             throw new Error("Invalid or inexisting vehicle");
         }
 
-        if (vehicleExists.favorite === true) {
-            throw new Error("Vehicle is already favorite");
+        if (vehicleExists.favorite === false) {
+            throw new Error("Vehicle is not favorite");
         }
 
-        const vehicle = await this.vehicleRepository.favoriteVehicle(vehicle_id);
+        const vehicle = await this.vehicleRepository.unfavoriteVehicle(vehicle_id);
 
         return vehicle;
     }
