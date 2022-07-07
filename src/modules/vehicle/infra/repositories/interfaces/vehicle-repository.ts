@@ -10,4 +10,5 @@ export interface VehicleRepository {
     deleteVehicle(vehicle_id: string): Promise<Vehicle>;
     favoriteVehicle(vehicle_id: string): Promise<Vehicle>;
     getAllFavoriteVehicles(): Promise<Vehicle[]>;
+    unfavoriteVehicle(vehicle_id: string): Promise<Vehicle>;
 }

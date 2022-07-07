@@ -78,4 +78,17 @@ export class PrismaVehicleRepository implements VehicleRepository {
 
         return vehicles;
     }
+
+    async unfavoriteVehicle(vehicle_id: string): Promise<Vehicle> {
+        const vehicle = await prisma.vehicle.update({
+            where: {
+                id: vehicle_id,
+            },
+            data: {
+                favorite: false,
+            },
+        });
+
+        return vehicle;
+    }
 }
