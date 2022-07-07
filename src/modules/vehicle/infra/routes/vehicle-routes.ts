@@ -6,6 +6,7 @@ import {
     getAllFavoriteVehicleController,
     getAllVehicleController,
     getOneVehicleController,
+    unfavoriteVehicleController,
     updateVehicleController,
 } from "../../core/useCases";
 
@@ -13,6 +14,7 @@ const vehicleRoutes = Router();
 
 vehicleRoutes.put("/:id/favorites", favoriteVehicleController.handle);
 vehicleRoutes.get("/favorites", getAllFavoriteVehicleController.handle);
+vehicleRoutes.put("/:id/unfavorites", unfavoriteVehicleController.handle);
 vehicleRoutes.post("/", createVehicleController.handle);
 vehicleRoutes.get("/:id", getOneVehicleController.handle);
 vehicleRoutes.get("/", getAllVehicleController.handle);
