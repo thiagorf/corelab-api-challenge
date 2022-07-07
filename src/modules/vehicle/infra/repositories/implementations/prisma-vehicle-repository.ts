@@ -68,4 +68,14 @@ export class PrismaVehicleRepository implements VehicleRepository {
 
         return vehicle;
     }
+
+    async getAllFavoriteVehicles(): Promise<Vehicle[]> {
+        const vehicles = await prisma.vehicle.findMany({
+            where: {
+                favorite: true,
+            },
+        });
+
+        return vehicles;
+    }
 }
