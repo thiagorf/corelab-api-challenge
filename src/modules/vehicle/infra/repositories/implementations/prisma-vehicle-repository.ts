@@ -94,13 +94,28 @@ export class PrismaVehicleRepository implements VehicleRepository {
     }
 
     async filterVehicles(filters: FilterVehicleParams): Promise<Vehicle[]> {
-        const { search } = filters;
-        console.log(search);
+        const { search, sort } = filters;
+
+        const defaultSort = sort || "asc";
+
+        if (!search) {
+            const vehicles = await prisma.vehicle.findMany({
+                orderBy: {
+                    created_at: defaultSort,
+                },
+            });
+
+            return vehicles;
+        }
 
         const vehicles: Vehicle[] = await prisma.$queryRaw`
-            SELECT id, name, description, price, brand, color, year, plate FROM "Vehicle"
+            SELECT id, name, description, price, brand, color, year, plate, created_at FROM "Vehicle"
             WHERE
             "textSearch" @@ to_tsquery(${search + ":*"})
+            ORDER BY 
+            CASE WHEN ${defaultSort === "asc"} THEN "created_at" END ASC,
+            CASE WHEN ${defaultSort === "desc"} THEN "created_at" END DESC
+            
         `;
 
         return vehicles;
