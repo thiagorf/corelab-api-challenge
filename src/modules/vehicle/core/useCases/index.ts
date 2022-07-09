@@ -6,3 +6,4 @@ export * from "./deleteVehicle";
 export * from "./favoriteVehicle";
 export * from "./getAllFavoriteVehicle";
 export * from "./unfavoriteVehicle";
+export * from "./filterVehicle";

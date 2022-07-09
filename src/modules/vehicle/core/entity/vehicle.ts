@@ -2,10 +2,10 @@ export interface Vehicle {
     id: string;
     name: string;
     description: string;
-    price: number;
+    price: string;
     brand: string;
     color: string;
-    year: number;
+    year: string;
     plate: string;
     favorite: boolean;
 }

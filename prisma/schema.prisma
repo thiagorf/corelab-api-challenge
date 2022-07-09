@@ -15,10 +15,15 @@ model Vehicle {
   id String @id @default(uuid())
   name String
   description String
-  price Int
+  price String
   brand String
   color String
-  year Int
+  year String
   plate String
   favorite Boolean @default(false)
+  created_at DateTime @default(now())
+
+  textSearch  Unsupported("TSVECTOR")?
+
+  @@index([textSearch])
 }

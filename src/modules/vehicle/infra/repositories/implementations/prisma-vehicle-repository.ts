@@ -1,6 +1,7 @@
 import prisma from "../../../../../infra/database/prisma";
 import { Vehicle } from "../../../core/entity/vehicle";
 import { CreateVehicleDTO } from "../../../core/useCases/createVehicle";
+import { FilterVehicleParams } from "../../../core/useCases/filterVehicle/filter-vehicle-params";
 import { UpdateVehicleDTO } from "../../../core/useCases/updateVehicle/update-vehicle-dto";
 import { VehicleRepository } from "../interfaces/vehicle-repository";
 
@@ -90,5 +91,18 @@ export class PrismaVehicleRepository implements VehicleRepository {
         });
 
         return vehicle;
+    }
+
+    async filterVehicles(filters: FilterVehicleParams): Promise<Vehicle[]> {
+        const { search } = filters;
+        console.log(search);
+
+        const vehicles: Vehicle[] = await prisma.$queryRaw`
+            SELECT id, name, description, price, brand, color, year, plate FROM "Vehicle"
+            WHERE
+            "textSearch" @@ to_tsquery(${search + ":*"})
+        `;
+
+        return vehicles;
     }
 }

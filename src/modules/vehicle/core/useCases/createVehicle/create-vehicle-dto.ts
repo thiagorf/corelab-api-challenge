@@ -1,9 +1,9 @@
 export interface CreateVehicleDTO {
     name: string;
     description: string;
-    price: number;
+    price: string;
     brand: string;
     color: string;
-    year: number;
+    year: string;
     plate: string;
 }
