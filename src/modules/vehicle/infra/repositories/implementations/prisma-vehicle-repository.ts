@@ -100,6 +100,9 @@ export class PrismaVehicleRepository implements VehicleRepository {
 
         if (!search) {
             const vehicles = await prisma.vehicle.findMany({
+                where: {
+                    favorite: false,
+                },
                 orderBy: {
                     created_at: defaultSort,
                 },
@@ -109,8 +112,8 @@ export class PrismaVehicleRepository implements VehicleRepository {
         }
 
         const vehicles: Vehicle[] = await prisma.$queryRaw`
-            SELECT id, name, description, price, brand, color, year, plate, created_at FROM "Vehicle"
-            WHERE
+            SELECT id, name, description, price, brand, color, year, favorite, plate, created_at FROM "Vehicle"
+            WHERE "favorite" = true AND
             "textSearch" @@ to_tsquery(${search + ":*"})
             ORDER BY 
             CASE WHEN ${defaultSort === "asc"} THEN "created_at" END ASC,
